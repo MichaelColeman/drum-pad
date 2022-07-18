@@ -29,4 +29,24 @@ const drums = new Howl({
         354.48979591836684
       ]
     }
-  });
+});
+
+const drumkit = document.querySelector('.drumkit');
+function playDrum(e) {
+    if(e.target.classList.contains('pad')) {
+        e.preventDefault();
+        let soundToPlay = e.target.dataset.sound;
+        drums.play(soundToPlay);
+    }
+}
+
+function setViewportHeight() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+setViewportHeight();
+window.addEventListener('resize', () => {
+  setTimeout(setViewportHeight, 100);
+});
+drumkit.addEventListener("touchstart", playDrum);
+drumkit.addEventListener("click", playDrum);
